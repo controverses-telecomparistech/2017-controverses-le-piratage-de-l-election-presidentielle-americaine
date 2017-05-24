@@ -22,4 +22,6 @@ numero;url;date;type d'url;type d'acteur;thème dans la controverse;position vis-
 20;https://fr.wikipedia.org/wiki/Accusations_d%27ing%C3%A9rences_russes_dans_l%27%C3%A9lection_pr%C3%A9sidentielle_am%C3%A9ricaine_de_2016;13/05/2017;wikipedia;exterieur;tout;;moyen;oui
 21;http://www.yjil.yale.edu/hacking-the-election/;28/11/2016;blog;individuel;comment les US peuvent réagir à 'agression des russes ?;;moyen;oui
 22;http://www.slate.com/articles/technology/future_tense/2016/12/how_russia_hacked_american_voters.html;13/12/2016;presse;individuel;implication des Russes;affirmation;moyen;oui
-23;http://www.rubenmajor.com/2017/04/13/florida-general-election-problems-indicate-potential-vote-count-hacking/;13/04/2017;blog;indiciduel;possibilité d'un hack;affirmation;fort;oui
+23;http://www.rubenmajor.com/2017/04/13/florida-general-election-problems-indicate-potential-vote-count-hacking/;13/04/2017;blog;individuel;possibilité d'un hack;affirmation;fort;oui
+24;http://www.liberation.fr/planete/2016/12/09/recomptage-des-voix-dans-des-swing-states-americains-la-fin-d-un-minuscule-espoir_1534074;09/12/2016;presse;journalisme;validité des elections;neutre;fort;oui
+25;http://www.factcheck.org/2016/12/trump-russia-u-s-election/;08/12/2016;blog;associatif;implication des Russes;affirmation;moyen-fort;oui
