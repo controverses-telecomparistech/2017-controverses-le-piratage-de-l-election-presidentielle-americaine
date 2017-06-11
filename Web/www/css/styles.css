@@ -1,0 +1,290 @@
+body{
+	position: relative;
+	background-color: black;
+	font-family: Lato,sans-serif;
+	margin:0;
+	padding: 0;
+}
+
+header{
+	font-family: Lato,sans-serif;
+}
+
+footer{
+	font-family: Lato,sans-serif;
+}
+
+h1{
+	text-align: center;
+	font-weight: 900;
+}
+
+.c1{
+	color:whitesmoke;
+}
+
+/* Header */
+.navbar-header{
+	padding-left: 80px;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    background-color: #FFFF00;
+    color: #FFC0CB;
+}
+
+.fit { 
+  max-width: 100%;
+  max-height: 100%;
+}
+.center {
+  display: block;
+  margin: auto;
+}
+
+#header {
+	margin-top: 3.80%;
+}
+
+/*Bouton scroll*/
+
+.arrow {
+  background-color: black;
+  width: 10%;
+  margin: 0 auto;
+}
+
+#imgarrow {
+	width:50%;
+	background-color: black;
+}
+
+#arrowbutton {
+	background-color: black;
+	border: none;
+}
+#arrowbutton:focus {outline:0;}
+
+/*Parties*/
+
+#intro{
+	padding-top:60px;
+	padding-bottom: 60px;
+	text-align: justify;
+	font-size: 16px;
+	color: #fff;
+}
+
+#contro1{
+	background-color: rgba(100,100,100,1);
+	height:850px;
+	padding-top:50px;
+}
+
+
+
+#contro2{
+	background-color: white;
+	padding-top:50px;
+	height:1000px;
+	color: black;
+}
+
+#debats{
+	margin: 0 auto;
+	display: block;
+}
+
+#contro3{
+	background-color: rgba(100,100,100,1);
+	padding-top:50px;
+	height:825px;
+}
+
+#interviews{
+	background-color: rgba(50,50,50,1);
+	padding-top:50px;
+	color: #fff;
+	font-family: Lato,sans-serif;
+}
+
+#whorwe{
+	background-color: rgba(100,100,100,1);
+	color:white;
+	text-align: center;
+	padding-top:50px;
+}
+
+/*Légende carte des acteurs*/
+
+#legende{
+	text-align: center;
+}
+#svglegende{
+	width: 60%;
+	border:none;
+}
+h2{
+	font-family: Lato,sans-serif;
+}
+
+/*Téléchargement interview*/
+
+#dlbutton{
+	background-color: white; 
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    border-radius: 4px;
+}
+
+#dlbutton:hover{
+	background-color: black;
+    color: white;
+}
+
+#dlbutton:focus {outline:0;}
+
+
+#dlform{
+	text-align: center;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+
+
+
+/*Titres texte déroulant*/
+#int1{
+	text-align:center;
+	padding-left: 5%;
+	padding-right: 5%;
+	font-family: Lato,sans-serif;
+}
+#int2{
+	text-align:center;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+#int3{
+	text-align:center;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+#int4{
+	text-align:center;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+#int5{
+	text-align:center;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+#int6{
+	text-align:center;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+#int7{
+	text-align:center;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+/*Interviews défilantes*/
+
+#int1txt{
+	display: block;
+	text-align: justify;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+#int2txt{
+	display: block;
+	text-align: justify;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+#int3txt{
+	display: block;
+	text-align: justify;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+#int4txt{
+	display: block;
+	text-align: justify;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+#int5txt{
+	display: block;
+	text-align: justify;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+#int6txt{
+	display: block;
+	text-align: justify;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+#int7txt{
+	display: block;
+	text-align: justify;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+/*footer*/
+footer{
+	background-color: black;
+	padding: 30px;
+	color:white;
+}
+footer p{
+	text-align:center;
+}
+
+/*Téléchargement interview*/
+
+#bibliobutton{
+	background-color: grey; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    border-radius: 4px;
+}
+
+#bibliobutton:hover{
+	background-color: white;
+    color: grey;
+}
+
+#bibliobutton:focus {outline:0;}
+
+
+#biblioform{
+	text-align: center;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}

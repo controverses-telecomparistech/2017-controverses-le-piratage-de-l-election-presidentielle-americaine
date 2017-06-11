@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Piratage Election Américaine</title>
+    <link href="img/box.png" rel="shortcut icon">
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS/JS -->
+    <style>
+      #tooltip {
+        color: white;
+        opacity: .9;
+        background: #333;
+        padding: 5px;
+        border: 1px solid lightgrey;
+        border-radius: 5px;
+        position: absolute;
+        text-align: justify;
+        z-index: 10;
+        visibility: hidden;
+        pointer-events: none;
+        padding-right: 10px;
+      }
+      #circle circle {
+        fill: none;
+        pointer-events: all;
+      }
+      path.group {
+        fill-opacity: .8;
+      }
+      path.chord {
+        fill-opacity: .8;
+        stroke: #000;
+        stroke-width: .25px;
+      }
+      #circle:hover path.fadechord {
+        display: none;
+      } 
+    </style>
+    <link href="css/styles.css" rel="stylesheet">
+    <style type="text/css">@import url("http://fonts.googleapis.com/css?family=Lato:400,700,900");</style>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-45101494-1']);
+    _gaq.push(['_setDomainName', 'delimited.io']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  
+
+  <body data-spy="scroll" data-target=".navbar" data-offset="50" id="page-top">
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid" >
+    <div class="navbar-header page-scroll">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand page-scroll" href="#page-top">ETIC</a>
+    </div>
+    <div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="hidden"><a class="page-scroll" href="#page-top"></a></li>
+          <li><a class="page-scroll" href="#intro">Introduction</a></li>
+          <li><a class="page-scroll" href="#contro1">Cartographie des acteurs</a></li>
+          <li><a class="page-scroll" href="#contro2">Arbre des débats</a></li>
+          <li><a class="page-scroll" href="#contro3">Chronologie</a></li>
+          <li><a class="page-scroll" href="#interviews">Interviews</a></li>
+          <li><a class="page-scroll" href="#whorwe">Qui sommes-nous ?</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>    
+
+<!-- Fin barre de navigation -->
+
+<img src="img/header.jpg" alt="" class="center fit" id="header">
+<div class="arrow"><button type="button" id="arrowbutton"><img src="img/arrow.png" alt="" id="imgarrow"></div>
+
+<!--Fin accueil-->
+
+<div id="intro" class="container-fluid">
+  <h1>Introduction</h1>
+  &emsp;
+  <p>Le cours « Enjeux des Technologies de l’Information et des Communications » a pour objectif de sensibiliser les élèves-ingénieurs de Télécom ParisTech à l’évolution de leur contexte professionnel et civique. Il s’agit d’une introduction à l’univers incertain de la recherche scientifique et technique en procédant à la description d’un objet : la controverse sociotechnique. À travers les méthodes de cartographie des controverses, le but est de former les futurs ingénieurs à l’analyse des relations entre science, technique et société, afin qu’ils puissent tenir une place responsable dans la démocratie technique contemporaine. Dans cette perspective, nous avons choisi de nous intéresser à la controverse du “piratage” de l’élection présidentielle américaine.<br><br>Le gouvernement américain d’Obama a accusé la Russie d’avoir interféré dans les élections présidentielles de 2016, notamment par le piratage de documents confidentiels du Parti démocrate. Le 22 juillet 2016, en pleine campagne présidentielle américaine, le site lanceur d’alerte Wikileaks a publié un grand nombre de courriels privés dérobés aux hauts responsables du parti démocrate. Huit jours plus tôt, le journal Washington Post déclarait que des pirates informatiques liés au pouvoir russe s’étaient infiltrés dans le réseau du Comité national démocrate. Ce n’est qu’après la publication par Wikileaks que les médias ont commencé à dénoncer en masse l’ingérence russe dans les élections américaines. Alors qu’aucune expertise n’est encore publiée, les théories sont déjà nombreuses. Le gouvernement américain a décidé de mettre en place des sanctions diplomatiques en représailles. La Russie nie les accusations.
+</p>
+</div>
+
+<!--Fin introduction-->
+
+<div id="contro1" class="container-fluid">
+  <h1 class="c1">Cartographie des acteurs</h1>
+  <div id="legende"><iframe src="legende.svg" id="svglegende"></iframe></div>
+  <svg id="svg1" width='5px' height='5px'></svg>
+  <div id="tooltip"></div>
+    <script src="js/d3.v3.min.js"></script>
+    <script src="lib/queue.js"></script>
+    <script src="lib/underscore.js"></script>
+    <script src="js/mapper.js"></script>
+    <!--Fin import des scripts pour carte des acteurs + Début du code de la carte des acteurs-->
+    <script>
+
+      //Création de la carte
+      queue()
+        .defer(d3.json, 'data/acteurs-matrix.json')
+        .defer(d3.csv, 'data/acteurs.csv')
+        .await(function(err, matrix, mmap) { 
+          if (err) console.log(err);
+          _.each(mmap, function (d, i) { d.id=i; d.data=d.color })
+          drawChords(matrix, mmap);
+        });
+      
+      //Création des cordes
+      function drawChords (matrix, mmap) {
+        var w = $(document).width()*0.48, h = $(document).height()*0.1, r1 = h / 2, r0 = r1 - 110;
+
+        var chord = d3.layout.chord()
+            .padding(.02)
+            .sortSubgroups(d3.descending)
+            .sortChords(d3.descending);
+
+        var arc = d3.svg.arc()
+            .innerRadius(r0)
+            .outerRadius(r0 + 20);
+
+        var svg = d3.select("#svg1").append("svg:svg")
+            .attr("width", w)
+            .attr("height", h)
+          .append("svg:g")
+            .attr("id", "circle")
+            .attr("transform", "translate(" + w / 2 + "," + h / 2 + ")");
+
+        document.getElementById("svg1").style.overflow="visible";
+
+            svg.append("circle")
+                .attr("r", r0 + 20);
+
+        var rdr = chordRdr(matrix, mmap);
+        chord.matrix(matrix);
+
+        var g = svg.selectAll("g.group")
+            .data(chord.groups())
+          .enter().append("svg:g")
+            .attr("class", "group")
+            .on("mouseover", mouseover)
+            .on("mouseout", function (d) { d3.select("#tooltip").style("visibility", "hidden") });
+
+        g.append("svg:path")
+            .style("stroke", "grey")
+            .style("fill", function(d) { return rdr(d).gdata; })
+            .attr("d", arc);
+
+        g.append("svg:text")
+            .each(function(d) { d.angle = (d.startAngle + d.endAngle) / 2; })
+            .attr("dy", ".35em")
+            .style("font-family", "Lato,sans-serif")
+            .style("font-size", "15px")
+            .attr("text-anchor", function(d) { return d.angle > Math.PI ? "end" : null; })
+            .attr("transform", function(d) {
+              return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")"
+                  + "translate(" + (r0 + 26) + ")"
+                  + (d.angle > Math.PI ? "rotate(180)" : "");
+            })
+            .text(function(d) { return rdr(d).gname; });
+
+          //place la tooltip lorsqu'on survole une corde. Le groupe a décidé de ne pas utiliser cette fonction
+          var chordPaths = svg.selectAll("path.chord")
+                .data(chord.chords())
+              .enter().append("svg:path")
+                .attr("class", "chord")
+                .style("stroke", "grey")
+                .style("fill", function(d) { return _.where(mmap, {id: d.source.index })[0].data;; })
+                .attr("d", d3.svg.chord().radius(r0))
+                .on("mouseover", function (d) {
+                  d3.select("#tooltip")
+                    .style("visibility", "invisible") //ici invisible, cache cette fonctionnalité
+                    .html(chordTip(rdr(d)))
+                    .style("top", function () { return (d3.event.pageY - 100)+"px"})
+                    .style("left", function () { return (d3.event.pageX - 100)+"px";})
+                })
+                .on("mouseout", function (d) { d3.select("#tooltip").style("visibility", "hidden") });
+
+          //Donne l'information à placer dans la tooltip pour une corde
+          function chordTip (d) {
+            var p = d3.format(".1%"), q = d3.format(",.2r")
+            return "Chord Info:<br/>"
+              +  d.sname + " → " + d.tname
+              + ": " + p(d.svalue) + "<br/>"
+              + d.tname + " → " + d.sname
+              + ": " + p(d.tvalue) + "<br/>";
+          }
+
+          //Donne l'information à placer dans la tooltip pour un acteur
+          function groupTip (d) {
+            var p = d3.format(".1%"), q = d3.format(",.2r")
+            switch (d.gname){
+              case "Wikileaks":
+                return "Wikileaks :<br/><br/>" +
+
+                "Fondée en 2006 par Julian Assange, cette organisation non-gouvernementale a pour objectif la publication de documents et d’analyses politiques à l’échelle du monde tout en protégeant les sources. A ce jour, de nombreux documents relatifs à la corruption, l’espionnage et la violation des droits de l’homme dans différents pays y ont été publiés. Dans cette controverse, l’organisation affirme être totalement neutre et n’avoir fait que publier ce qui lui avait été apporté : les mails du parti démocrate. Wikileaks agit pour la liberté totale de l’information, elle estime donc que ses agissements sont indispensable au processus démocratique car les personnalités politiques ne sont pas honnêtes avec les citoyens.                 ";
+                break;
+              case "Gvt Obama":
+                return "La Maison Blanche, sous Obama :<br/><br/>" + "Barack Obama est, depuis 2009 le 44ème président des Etats Unis. Il en est à son deuxième mandat et ne peut donc plus se présenter pour la présidence du pays. Lors de la campagne présidentielle, il critique souvent Donald Trump, jusqu’à le déclarer inapte à la présidence. Il ne s’exprime pas sur la diffusion des mails du DNC avant d’avoir reçu l’analyse des agences de renseignement. Ce rapport déclarant la Russie impliquée, Obama déclare 35 diplomates Russes “persona non-grata” : ils ne sont plus les bienvenus sur le sol américain. Cette action est jugée la plus forte à l’encontre de la Russie depuis la Guerre Froide.                 ";
+                break;
+              case "Gvt Trump":
+                return "La Maison Blanche, sous Trump :<br/><br/>" + "Donald Trump devient président le 20 janvier 2017. Sa politique de communication sur le sujet de la controverse ne change pas d’orientation entre sa campagne et sa présidence. Il continue d’affirmer ne pas être en lien avec la Russie et qualifie les accusations de ses opposants de théorie du complot.                  ";
+                break;
+              case "Gvt Putin":
+                return "Le Kremlin :<br/><br/>" + "Vladimir Poutine, à la tête du gouvernement Russe depuis 2000, ne reconnaît pas l’implication du gouvernement Russe dans le piratage des élections américaines. Il juge que la politique menée par l’administration d’Obama ne cherche qu’à fragiliser les futurs relations entre la Russie et le Etats Unis d’Amérique. Il choisit donc de ne pas riposter face à cette provocation et invite même des diplomates Américains pour les festivités du Nouvel An.                  ";
+                break;
+              case "Agences":
+                return "Agences de renseignement américain (CIA, FBI, NSA) :<br/><br/>" + "La communauté du renseignement des États-Unis (United States Intelligence Community), créée le 4 décembre 1981 par le président des États-Unis Ronald Reagan, regroupe 17 services de renseignement des États-Unis appartenant à plusieurs ministères. En octobre 2016, ces agences de renseignement affirment que le piratage de l'élection présidentielle américaine vient de la Russie. Elles ne fournissent pas de rapport d'enquête.                  ";
+                break;
+              case "DNC":
+                return "Le Democratic National Comitee (DNC) :<br/><br/>" + "Organisme politique chargé de diriger le Parti démocrate (un des deux Partis majeurs des Etats-Unis) depuis 1848, il se place en tant que victime dans la controverse à la suite de la divulgation des mails que se sont échangés les hauts-placés du Parti. Il adopte alors une stratégie de communication de “victime du complot Russe” lors de la campagne. Hillary Clinton, la candidate du Parti en lice pour la présidence accuse la Russie et Donald Trump, son opposant d’avoir organiser le piratage.                 ";
+                break;
+              case "RNC":
+                return "Le Grand Old Party (GOP) :<br/><br/>" + "Plus connu en France sous le nom de Parti Républicain, est fondé en 1854. Dans cette controverse il se place en victime par rapport aux accusations que fait la candidate DNC. Son candidat en lice pour la présidence, Donald Trump, adopte une stratégie de décrédibilisation de son adversaire.                 ";
+                break;
+              case "Cour Suprême":
+                return "La Cour Suprême :<br/><br/>" + "Institution juridique la plus élevée s’occupant entre autre des contentieux électoraux. Elle joue également un rôle de jugement ou de validation dans la procédure de destitution du chef de l'État. Dans le cadre de la controverse, la Cour Suprême a été saisie par une pétition visant à annuler les résultats du vote. Elle a également nommé un procureur spécial pour enquêter sur l’ingérence Russe dans les élections présidentielles.                 ";
+                break;
+              case "Machines":
+                return "Les machines de vote US :<br/><br/>" + "Le vote électronique est un système de vote dématérialisé, à comptage automatisé, notamment des scrutins, à l'aide de systèmes informatiques. Utilisées lors de l'élection présidentielle américaine, les machines de vote sont un sujet de controverse dans la mesure où certaines entreprises de sécurité doutent de la sécurité et de la fiabilité de ces systèmes.                  ";
+                break;
+              case "Databases":
+                return "Les Databases :<br/><br/>" + "";
+                break;
+              case "Senate & HoR":
+                return "Senate & House of Representative :<br/><br/>" + "La Chambre des représentants des États-Unis (United States House of Representatives) compose, avec le Sénat, le Congrès des États-Unis et forme à ce titre un des deux organes du pouvoir législatif américain. Elle représente les citoyens au sein de l'Union.                 ";
+                break;
+              case "Robert Muller":
+                return "Robert Mueller :<br/><br/>" + "Robert Mueller  est un ancien militaire et avocat américain, sixième directeur du Federal Bureau of Investigation (FBI), en fonction du 4 septembre 2001 au 4 septembre 2013. Il est choisi pour être le procureur indépendant en charge de l’enquête sur les liens entre le président américain Donald Trump et la Russie, le 17 mai 2017, par Jeff Sessions, procureur général des États-Unis.                 ";
+                break;
+              case "John Podesta":
+                return "John Podesta :<br/><br/>" + "John Podesta est un homme politique américain du parti démocrate. En 2014, il devient Conseiller du président des Etats-Unis sous l'administration Obama. En 2016, il est chargé de la campagne électorale d'Hillary Clinton. En octobre 2016, suite à un phishing intenté par des hackers sur son compte Gmail personnel, ses mails sont piratés et publiés                 ";
+                break;
+              case "John Laurits":
+                return "John Laurits :<br/><br/>" + "Parfois connu sous le nom de «poète mathématique», John Laurits est un poète, journaliste, activiste et amateur de mathématiques de l'Oregon. Il a écrit sur son blog des articles à propos de la controverse du piratage de l'élection présidentielle américaine par la Russie.                 ";
+                break;
+              case "Experts cyber":
+                return "Entreprises de cybersécurité (CrowdStrike,SecureWorks,Fidelis) :<br/><br/>" + "Ce sont des entreprises expertes de sécurité informatique. CrowdStrike, Fidelis Cybersecurity, Mandiant, SecureWorks et ThreatConnect, ainsi que le rédacteur de Ars Technica, déclarent que la fuite de courriels lors de l'élection de 2016 s'inscrit dans une série d'attaques informatiques contre la convention démocrate, perpétrée par deux groupes liés aux services russes : Fancy Bear et Cozy Bear                  ";
+                break;
+              case "Julian Assange":
+                return "Julian Assange :<br/><br/>" + "Julian Paul Assange est un informaticien et cybermilitant australien. Il est connu en tant que fondateur, rédacteur en chef et porte-parole de WikiLeaks. Devant la menace d'une extradition aux États-Unis, où il fait l'objet de poursuites judiciaires, il vit réfugié à l’ambassade d’Équateur à Londres depuis juin 2012.                 ";
+                break;
+              case "Anonymous":
+                return "Anonymous :<br/><br/>" + "Anonymous est un mouvement hacktiviste se manifestant sur Internet. Après une série de manifestations controversées, hautement publiées et d'attaques informatiques par Anonymous en 2008, les incidents liés à ce groupe ont fortement augmenté. En considération de ces capacités, Anonymous a été présenté par la chaîne télévisée américaine CNN comme étant l'un des trois principaux successeurs de WikiLeaks.                 ";
+                break;
+              case "darkreading.com":
+                return "Le site web 'DarkReading.com' :<br/><br/>" + "DarkReading est un site web rassemblant une communauté en ligne de professionnels de sécurité informatique comprenant des chercheurs en sécurité informatique. L'objectif est de discuter autour de controverses liées à la sécurité de systèmes informatiques.                 ";
+                break;
+              case "Ruben Major":
+                return "Ruben Major :<br/><br/>" + "Ruben Major est un candidat de Floride pour le Sénat.Il écrit sur la politique, la sécurité publique et les services médicaux d'urgence. Il évoque des failles du système de vote lors de l'élection présidentielle américaine en s'appuyant sur les machines de vote les possibles erreurs de comptage des scrutins.                  ";
+                break;
+              case "Guccifer 2.0":
+                return "Guccifer 2.0 :<br/><br/>" + "Guccifer 2.0 est un pirate informatique solitaire qui revendique l'attaque du Comité National Démocratique. Selon les diverses entreprises de la cybersécurité et les responsables gouvernementaux des États-Unis, Guccifer 2.0 est un personnage qui a été créé par les services de renseignement russes pour couvrir leur ingérence dans les élections présidentielles américaines de 2016.                  ";
+                break;
+              case "Fancy/Cozy Bear":
+                return "Fancy Bear & Cozy Bear :<br/><br/>" + "Fancy Bear et Cozy Bear sont des groupes de hackers, probablement liés aux renseignements militaires russes (GRU). Plusieurs cyberattaques seraient attribuées à ces groupe, notamment la cyberattaque contre le piratage du Comité national démocrate en lien avec l'Ingérence russe dans l'élection présidentielle américaine de 2016 et des piratages concernant le Bundestag, la Maison-Blanche, le site d'Emmanuel Macron 'En Marche', et l'OTAN                  ";
+                break;
+              case "Usine à trolls":
+                return "Usines à trolls (4Chan,Reddit) :<br/><br/>" + "Salariés possiblement employés par la Russie pour réaliser une propagande sur Internet. Ces propagandistes auraient influencé plusieurs élections, notamment grâce à Twitter, en se faisant passer pour des militants. Par exemple, lors des élections américaines, il est avéré que certains comptes pro-Trump étaient en fait des comptes localisés en Russie. Ici, la controverse s'ouvre : s'il est vrai que ces usines à troll existent, difficile de savoir si les comptes pro-Trump russes sont liés à ces « usines ».                  ";
+                break;
+              }
+
+            }
+
+          //Place la tooltip lorsqu'on survole un acteur
+          function mouseover(d, i) {
+            d3.select("#tooltip")
+              .style("visibility", "visible")
+              .html(groupTip(rdr(d)))
+              .style("top", function () { return $(window).height()*2.05 +"px"})
+              .style("left", function () { return $(window).width()*0.55 +"px";})
+
+            chordPaths.classed("fadechord", function(p) {
+              return p.source.index != i
+                  && p.target.index != i;
+            });
+          }
+      }
+    </script>
+
+</div>
+<!--Fin Carte des Acteurs-->
+
+<!--Arbre des débats-->
+<div id="contro2" class="container-fluid">
+  <h1>Arbre des débats</h1>
+  <iframe width="1100" height="800" frameborder="0" src="https://www.mindmeister.com/maps/public_map_shell/908429135/le-piratage-de-l-lection-pr-sidentielle-am-ricaine?width=1100&height=800&z=auto" scrolling="no" style="overflow: hidden; margin-bottom: 5px;" id="debats">Votre navigateur ne peut pas afficher les images. Veuillez visiter <a href="https://www.mindmeister.com/908429135/le-piratage-de-l-lection-pr-sidentielle-am-ricaine" target="_blank">Le piratage de lélection présidentielle américaineélection présidentielle américaine</a> sur MindMeister.</iframe>
+<!-- Fin arbre des débats-->
+
+</div>
+
+<!--Début chronologie-->
+<div id="contro3" class="container-fluid">
+  <h1 class="c1">Chronologie</h1>
+  &emsp;
+  <iframe src='https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?source=1o9lN1vlOC0xOyJmrPF3QWLpXjNyybDvgWxEa5ENcArc&font=Default&lang=fr&initial_zoom=2&height=650' width='100%' height='650' webkitallowfullscreen mozallowfullscreen allowfullscreen frameborder='0'></iframe>
+</div>
+<!-- Fin chronologie-->
+
+<!--Début interviews-->
+<div id="interviews" class="container-fluid">
+  <h1>Entretien avec Julie GOMMES le Samedi 20 Mai 2017</h1>
+  <p>Afin de confronter notre analyse des différents débats avec la réalité, nous avons contacté des acteurs de la controverse tels que Julien Nocetti, chercheur à l’Institut français des relations internationales, Julie Gommes, auditrice en cybersécurité chez DevoTeam, Thomas Gomart, directeur de l'Institut français des relations internationales et enfin l'ambassade de Russie en France. Voici un extrait de l'entretien semi-directif réalisé avec Julie Gommes le samedi 20 mai 2017.</p>
+  <div id="int1"><h2 class="fa fa-angle-down fa-2x" aria-hidden="true"> Quelle est votre définition de la cybersécurité ? / En quoi consiste la cybersécurité ?</h2></div>
+  <div id="int1txt" class="hidin" style="display: none;">Je préfère employer le terme sécurité des systèmes d’information plutôt que cybersécurité. On a le mot « cyber » qui part dans tous les sens : les cyberguerres, les cyber-armées, etc. C’est devenu ce qu’on appelle un « buzzword », on devrait parler de sécurité des systèmes d’information. La sécurité de l’information aujourd’hui couvre un champ beaucoup plus large que seulement l’informatique, la technique. Cela passe par les métiers de l’entreprise, ça peut passer par l’intendance, ça peut passer par l’accueil. Aujourd’hui on peut porter atteinte à la sécurité du système d’information en exploitant une vulnérabilité qui n’est pas du tout informatique. Par exemple, en sécurité physique, on peut aller piquer des données dans un data center s’il n’y a pas un processus de gestion des accès. Par exemple, on y entre comme dans un moulin, en se faisant passer pour un livreur. C’est déjà arrivé sur des audits en sécurité physique. On se fait passer pour le livreur, on entre dans le data center et on peut voler des informations comme on veut en se connectant à des serveurs. Donc cela arrive malheureusement encore aujourd’hui. Pour moi, la sécurité, c’est vraiment assez global, ce n’est pas, seulement technique. Je préfère parler de sécurité de l’information en elle-même et du fait qu’elle reste confidentielle, qu’elle soit disponible à l’instant t quand on en a besoin et qu’elle soit intégrée, c’est-à-dire qu’on ne puisse pas la modifier ou y toucher. </div>
+
+  <div id="int2"><h2 class="fa fa-angle-down fa-2x" aria-hidden="true"> Comment peut-on qualifier l’année 2017 en matière de sécurité de l’information ? </h2></div>
+  <div id="int2txt" class="hidin" style="display: none;">C’est totalement fou, et ce n’est que le début ! L’année n’est pas finie. On en parle à chaque élection à juste titre et puis vous avez vu la publication des Shadow Brokers il y a quelques semaines. Ils ont sorti des outils utilisés par la NSA. On a récemment là dans la semaine WikiLeaks qui a sorti d’autres outils utilisés par la CIA, la NSA, etc. Tout cela est un début d’apocalypse pour nos entreprises parce que finalement, si on a eu WanaCry il y a quelques jours, c’est en fait à cause d’un outil qu’avait publié Shadow Brokers. Il a été modifié pour pouvoir exploiter la vulnérabilité. La modification consistait en une injection d’un crypto-locker. Ce qui est fou aujourd’hui c’est que ces publications d’outils ne font pas réagir les entreprises. Il faut savoir que dès que ces outils sont publiés, on a des attaquants, ça va du gamin de quinze ans aux Polonais ou au Roumain, qui récupèrent ces outils et qui s’en servent, on l’a vu avec WanaCry, pour mener des attaques. Ce qui est embêtant c’est qu’aujourd’hui les entreprises, dès la sortie de ces outils, ne se mettent pas en mode cellule de grise ou bien es ce qu’on est vulnérable à cet outil. Les entreprises attendent finalement, en se disant que ça ne sera peut-être pas exploité et on verra bien ce que ça va donner. Alors que ce sera forcément exploité donc je pense que 2017 est loin d’être terminée en termes de sécurité. On aura d’autres attaques. </div>
+
+  <div id="int3"><h2 class="fa fa-angle-down fa-2x" aria-hidden="true"> Que pensez-vous de l’ampleur d’une attaque contre les systèmes d’information sur le plan politique, dans le cadre d’une élection présidentielle ?</h2></div>
+  <div id="int3txt" class="hidin" style="display: none;">Alors pour perpétrer ces attaques, on va utiliser les systèmes d’information, encore une fois le terme « cybersécurité » me gêne. Alors il y a plusieurs choses. Déjà il faut bien qualifier le terme « attaque ». Une attaque c’est l’exploitation d’une vulnérabilité à des fins préjudiciables. C’est-à-dire je veux vous attaquer, je veux vous faire du mal, je vous attaque. Ce qui s’est passé avec WanaCry par exemple la semaine dernière, ce n’était pas ciblé, c’était dans le but de toucher très large. StuxNet, il y a plus de dix ans maintenant, c’était une attaque ciblée pour toucher le système nucléaire iranien. Le virus s’est propagé et s’est baladé partout jusqu’au jour où cela a fonctionné. Avec WanaCry c’était visiblement plus large. On voulait toucher de tous les côtés pour récolter des sous donc on n’était pas sur une attaque ciblée. Au niveau du plan politique, oui, oui c’est possible, il y a eu des précédents. En France, attention il y a eu beaucoup de bruit concernant la campagne de Macron avant le premier tour. C’est assez facile de se faire passer pour un russe sur internet. Pour tout vous dire, moi je m’étais amusée avec mon VPN à aller me balader sur le site de Macron avec une adresse IP russe juste pour faire du bruit, voilà c’était assez rigolo. Le problème aussi est que le site de Macron était vulnérable, il n’était pas mis à jour, il était facilement attaquable. Aujourd’hui cela peut être dévastateur, ça peut modifier les résultats. Quand on prend les machines à voter par exemple, c’est assez costaud aux Etats-Unis. Vous voyez ces machines à voter sont stockées dans des caves, des écoles, des musées, dans des salles, des mairies, etc., par spécialement surveillées, donc concernant ces machines, quasiment n’importe qui pourrait y avoir accès. Il est très facile de les modifier. Il est très facile de brancher une clé USB. Tout cela pourquoi ? Et bien parce qu’il n’y a pas une réelle démarche de sécurité autour de ces machines à voter pour les protéger, pour faire des audits réguliers, pour les mettre à jour. Par ailleurs, le code à l’intérieur de ces machines, on ne sait pas ce qu’il fait car cela est une propriété des constructeurs. Si demain j’appuie sur Hillary Clinton et la machine me renvoie +1 pour Donald Trump, il y a aucun recours là-dessus, on ne peut pas faire de constatations habituelles même avec les outils adéquats. Il y a un gros problème à ce niveau-là avec les machines à voter. Le deuxième problème c’est au niveau des sites internet qui sont souvent mal mis à jour voire pas du tout. C’est très facile d’accéder à des bases de données, avoir des accès administrateur pour pouvoir faire via ces accès là des publications de tout et n’importe quoi sur le site. Cela va plutôt être un enjeu de communication. Cela peut remettre en cause toute une campagne, il y a un vrai risque, un vrai risque qui est multiforme. </div>
+
+  <div id="int4"><h2 class="fa fa-angle-down fa-2x" aria-hidden="true"> Quelles sont les techniques de piratage les plus utilisées ? Comment peut-on s’y préparer ? </h2></div>
+  <div id="int4txt" class="hidin" style="display: none;">Alors cela va dépendre du public d’attaquants. Vous pouvez avoir des techniques assez différentes suivant leur niveau, j’ai envie de vous dire de l’attaque web ciblée, typiquement alors pirater les sites web de site pour aller récupérer des bases de données derrière et faire un phishing ou bien publier sur le site « je suis le meilleur » pour impressionner ses petits copains, ça c’est l’attaque classique du gamin. Après vous avez aussi des groupes de pirates organisés qui vont parfois embrigader ces gamins pour aller justement faire des effacements ou récupérer des données. Cela constitue un premier niveau d’attaques informatiques. Si on veut rentrer un peu plus dans la technique, il y a tout ce qui relève de l’insertion, par exemple le KeyLogger. Alors un KeyLogger est-ce que vous savez ce que c’est ? [Nous hochons négativement la tête] C’est un outil qui va enregistrer ce que l’on tape sur le clavier d’un ordinateur. On peut l’attraper soit via une clé USB qu’on aurait branché stupidement sur sa machine soit en téléchargeant un logiciel contrefait par exemple. Cet enregistreur de frappe conserve tout ce que vous tapez. Tout est ensuite envoyé à l’attaquant. S’il récupère les informations d’un compte Yahoo d’il y a quinze ans ce n’est pas trop grave. Par contre quand il s’agit d’informations bancaires que vous tapez sur le clavier ou bien votre e-mail actuel et que vous vous connectez, là c’est plus intéressant car il y a beaucoup d’informations utiles pour le pirate. Il y a peut-être votre RIB que vous avez envoyez par mail à un copain pour le rembourser ou bien votre numéro de sécurité sociale. Si vous êtes américain, ce numéro est assez important. L’usurpation de droits est également beaucoup utilisée. Cela concerne toutes les attaques par « man in the middle ». Est-ce que vous voulez des éclairages là-dessus ? [Nous hochons positivement la tête] Imaginez une connexion du type StarBucks, MacDonald’s, qui sont assez ouvertes, ou sur un réseau même chez vous lorsque vous êtes connectés en Wi-Fi, cet personne va se mettre entre votre machine et votre point d’accès internet. Il va récupérer le trafic, dans un sens et dans l’autre. Qu’est-ce qu’il va récupérer ? Et bien pour se connecter par exemple à certains sites qui sont peu protégés. Aujourd’hui la plupart des sites, que ce soit Facebook ou Google, c’est écrit en « https » donc le trafic va être crypté mais il y a encore des sites qui ne sont pas en « https » et ces attaquants vont pouvoir récupérer les informations que vous transmettez, par exemple votre identifiant et votre mot de passe, soit encore les cookies de session qui peuvent leur permettre aussi de se connecter sur différentes applications. Cela constitue un des gros points d’attaques, plutôt liées au fait qu’aujourd’hui il y a beaucoup de réseaux qui sont assez peu protégés. Cela permet certes d’avoir un côté pratique et confortable pour avoir de l’internet gratuit partout par exemple pour les Hotspots, sauf qu’en général les données ne sont pas bien sécurisées. La technique du phishing, qui a été utilisée pour les attaques contre Hillary Clinton, reste encore beaucoup utilisée. Il existe des techniques de phishing en deux temps. Vous avez de la récupération de données personnelles puis l’attaquant va se servir de son mail professionnel pour envoyer des mails de phishing à l’intérieur de l’entreprise. Je ne sais pas si vous connaissez le concept de RedTeam. Il s’agit d’un nouveau type d’audit qui est pas mal car au lieu de simuler un seul attaquant, il y a toute une équipe multi-tâches. Il va y en avoir un qui craque le Wi-Fi de la boite, vous en avez un autre qui récupère les badges d’accès, vous en avez un autre qui est connecté aux systèmes d’information et qui va monter les privilèges du badge pour pouvoir permettre d’accéder aux bureaux de la direction. Cela va ensuite vous permettre de récupérer des documents, informations et de passer des coups de fil pour faire du social-phishing. L’idée est vraiment de se monter une équipe d’attaquant avec cinq ou six personnes et voir quelle est la vulnérabilité. Ce type d’audit est de plus en plus répandu et demandé par les entreprises parce qu’il y a toujours ce qu’on appelle des « fraudes au président », c’est-à-dire des gens qui vont vous faire transférer des milliers d’euros sur un compte pour le fermer quelques jours après, tout cela en faisant croire que c’est le comptable qui appelle depuis la salle de réunion. Il y a toujours ce type d’attaques aujourd’hui. Le phishing est un moyen pour collecter les informations dans ce genre d’attaque. </div>
+
+  <div id="int5"><h2 class="fa fa-angle-down fa-2x" aria-hidden="true"> Lorsque la CIA et le FBI ont publié des rapports en affirmant que les attaques venaient de la Russie, peut-on leur faire confiance ? </h2></div>
+  <div id="int5txt" class="hidin" style="display: none;">Peut-être qu’ils disposent d’informations que nous n’avons pas. Après il y a aussi les informations qu’ont les services de renseignement : les gens qui sont sur le terrain en Russie, les gens qui sont sur le terrain aux Etats-Unis, les gens qui ont infiltré des groupes de hackers, etc. Techniquement, ça reste hyper difficile de savoir qui est à l’origine de l’attaque. En général ce qu’il faut faire après une attaque c’est ne rien toucher. Ne rien toucher pour ne pas effacer les traces de l’attaquant, ou rajouter du bruit par-dessus. L’idée c’est de faire appel à des spécialistes de sécurité et des experts. Ils vont essayer de tracer l’attaquant, de détecter des pièges encore actifs laissés par l’attaquant pour revenir plus tard attaquer le système d’information. Ils vont également essayer de corriger les vulnérabilités du système que l’attaquant a exploitées. Il se peut que dans cette analyse post-incident, on s’aperçoive que les adresses sont effectivement localisées dans tel ou tel pays, pareil pour les serveurs. Mais encore une fois, avec de l’analyse technique pure, ce n’est pas possible de dire que c’est tel ou tel groupe si l’attaque n’est pas signée. </div>
+
+  <div id="int6"><h2 class="fa fa-angle-down fa-2x" aria-hidden="true"> D’un point de vue politique, quel est l’intérêt pour la Russie d’avoir, ou pas, effectué ces attaques ? </h2></div>
+  <div id="int6txt" class="hidin" style="display: none;">Alors ça c’est de la géopolitique. Pour moi, c’est dur de vous dire. Mais je pense qu’il y a une certaine idée de softpower, une volonté d’assoir sa puissance. Le fait même de dire qu’ils l’ont peut-être fait, même si ce n’est pas avéré, ça leur prête un pouvoir, une assise au niveau international. Aujourd’hui, tous les états vont avoir peur de ces attaquants russes. Ils communiquent bien là-dessus et ça leur donne une nouvelle position sur l’échiquier international. </div>
+
+  <div id="int7"><h2 class="fa fa-angle-down fa-2x" aria-hidden="true"> Quels sont les risques à craindre pour l’année à venir en termes de sécurité des systèmes d’informations et d’attaques ? </h2></div>
+  <div id="int7txt" class="hidin" style="display: none;">Alors c’est peut-être un peu tôt pour parler de 2018 mais déjà pour 2017, fin 2017 on risque d’avoir une belle apocalypse et on va bien s’amuser. Il est sûr qu’on va avoir d’autres problèmes. Comme je vous le disais, cela se fera par les outils qui sont révélés au grand public. On a eu le cas WanaCry, je pense qu’on va avoir l’équivalent avec d’autres outils que la NSA a utilisé et qui ont dévoilés aujourd’hui. Et cela parce que les entreprises n’ont toujours pas jugé bon de mettre en place des mises à jour de sécurité. On a récemment eu une attaque sur des millions d’objets connectés dont les mots de passe par défaut n’avaient pas été changé, parce que typiquement la petite caméra qu’on place chez soi ou bien le téléphone pour bébé, on ne change pas le mot de passe par défaut. Cela est possible par d’autres outils. Ah tiens d’ailleurs, cette semaine WikiLeaks a révélé d’autres outils pour mener des attaques contre les systèmes d’information, vous pourrez regarder l’article sur VAULT7. Il faut bien prendre conscience que dès qu’une vulnérabilité est publiée, il y a automatiquement des gens qui vont s’en servir à des fins malveillantes. Cela s’annonce plutôt chaud pour la fin de l’année. J’espère qu’il va y avoir une prise de conscience. Même au niveau mondial, on risque de voir de nouvelles attaques contre les systèmes d’information.</div>
+
+  <!--Lien de téléchargement-->
+  <form method="get" action="PDF/Interview.pdf" id="dlform"><button type="submit" id="dlbutton">Télécharger l'interview</button></form>
+
+
+</div>
+<!--Fin interviews-->
+
+<!--Début Qui sommes-nous ?-->
+<div id="whorwe" class="container-fluid">
+  <h1>Qui sommes-nous ?</h1>
+  &emsp;
+  <div class="row">
+
+      <div class="col-md-3">
+        <img src="img/robin.png" alt="" class="img-circle">
+        <p>Robin Blanchard<br>Intégrateur Web</p>
+      </div>
+        
+      <div class="col-md-3">
+        <img src="img/samuel.png" alt="" class="img-circle">
+        <p>Samuel Leonardo Gracio<br>Presse et média</p>
+      </div>
+    
+      <div class="col-md-3">
+        <img src="img/remi.jpg" alt="" class="img-circle">
+        <p>Rémi Leluc<br>Interview</p>
+      </div>
+
+      <div class="col-md-3">
+        <img src="img/jeanyves.jpg" alt="" class="img-circle">
+        <p>Jean-Yves Ouattara<br>Expertise scientifique</p>
+      </div>
+    
+    
+    </div>
+    <!-- fin row1 -->
+
+    <div class="row">
+
+      <div class="col-md-3">
+        <img src="img/aymane.jpg" alt="" class="img-circle">
+        <p>Aymane Kettani<br>Interview</p>
+      </div>
+        
+      <div class="col-md-3">
+        <img src="img/benoit.jpg" alt="" class="img-circle">
+        <p>Benoît Sénéchal<br>Politique et droit</p>
+      </div>
+    
+      <div class="col-md-3">
+        <img src="img/nicolas.jpg" alt="" class="img-circle">
+        <p>Nicolas Blazy<br>Designer Web</p>
+      </div>
+
+      <div class="col-md-3">
+        <img src="img/thomas.png" alt="" class="img-circle">
+        <p>Thomas Marchand<br>Société civile</p>
+      </div>
+    
+    
+    </div>
+    <!-- fin row2 -->
+</div>
+<!-- Fin Qui sommes-nous?-->
+
+    
+
+    <!-- Bootstrap -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/03b9410b13.js"></script>
+    <!--Scripts JavaScript-->
+    <script src="js/scripts.js"></script>
+
+    <!-- Scroll barre de navigation -->
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/scrolling-nav.js"></script>
+  </body>
+
+<footer>
+
+<!--Lien de téléchargement-->
+  <form method="get" action="PDF/Bibliographie.pdf" id="biblioform"><button type="submit" id="bibliobutton">Bibliographie</button></form>
+  <p>Ce site a été créé dans le cadre de l'UE ETIC de la BCI de l'école Télécom ParisTech.</p>
+</footer>
+</html>
